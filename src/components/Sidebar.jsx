@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   LayoutDashboard,
   FileText,
@@ -14,21 +16,29 @@ const Sidebar = () => {
       </h2>
 
       <nav className="space-y-3">
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 text-white">
-          <LayoutDashboard size={20} />
-          Dashboard
-        </button>
+       <Link
+  to="/dashboard"
+  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl bg-blue-600 text-white"
+>
+  <LayoutDashboard size={20} />
+  Dashboard
+</Link>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition">
-          <FileText size={20} />
-          My Posts
-        </button>
+        <Link
+  to="/my-posts"
+  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+>
+  <FileText size={20} />
+  My Posts
+</Link>
 
-        <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition">
-          <User size={20} />
-          Profile
-        </button>
-
+        <Link
+  to="/profile"
+  className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition"
+>
+  <User size={20} />
+  Profile
+</Link>
         <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-700 hover:bg-slate-100 transition">
           <Settings size={20} />
           Settings

@@ -1,4 +1,7 @@
+import { useNavigate } from "react-router-dom";
+
 const Profile = () => {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#FFF8E7] p-6">
       <div className="max-w-3xl mx-auto bg-white rounded-3xl shadow-md p-8">
@@ -17,9 +20,12 @@ const Profile = () => {
             Learning React, Node.js and building awesome projects 🚀
           </p>
 
-          <button className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition">
-            Edit Profile
-          </button>
+         <button
+  onClick={() => navigate("/edit-profile")}
+  className="mt-6 bg-blue-600 text-white px-6 py-3 rounded-xl hover:bg-blue-700 transition"
+>
+  Edit Profile
+</button>
         </div>
       </div>
     </div>
