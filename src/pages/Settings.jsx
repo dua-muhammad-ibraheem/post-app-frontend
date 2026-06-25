@@ -55,7 +55,7 @@ const Settings = () => {
 
           <div className="bg-white p-5 rounded-2xl shadow-md flex items-center justify-between cursor-pointer hover:shadow-lg transition">
             <div className="flex items-center gap-4">
-              <LogOut className="text-orange-500" />
+              <LogOut className="text-red-500" />
               <span className="font-medium">Logout</span>
             </div>
             <ChevronRight />

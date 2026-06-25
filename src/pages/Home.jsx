@@ -1,7 +1,7 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
 import Stats from "../components/Stats";
-import CreatePost from "../components/CreatePost";
+// import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 import Footer from "../components/Footer";
 
@@ -11,7 +11,7 @@ const Home = () => {
       <Navbar />
       <Hero />
       <Stats />
-      <CreatePost />
+      {/* <CreatePost /> */}
       <Posts />
       <Footer />
     </div>

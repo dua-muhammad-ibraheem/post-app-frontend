@@ -1,37 +1,28 @@
-const Hero = () => {
-  return (
-    <section className="w-full bg-[#EFEFEF] py-24 font-['Poppins',sans-serif]">
-      <div className="max-w-7xl mx-auto px-6 flex flex-col items-center text-center">
+<section className="w-full bg-[#FFF8E7] py-32">
+  <div className="max-w-6xl mx-auto px-6 text-center">
 
-        {/* Heading: Big, bold, and clean dark slate text */}
-        <h1 className="text-5xl md:text-7xl font-bold text-[#315762] leading-tight tracking-tight">
-          Share Your Moments
-        </h1>
+    <span className="inline-block bg-orange-100 text-[#EB8223] px-4 py-2 rounded-full text-sm font-semibold">
+      Share Ideas • Connect • Create
+    </span>
 
-        {/* Paragraph: Muted dark slate for premium readability */}
-        <p className="mt-6 max-w-2xl text-base md:text-lg text-[#315762]/80 leading-relaxed">
-          Create, manage and organize your posts in one place.
-          Login to upload photos, edit your content and build your personal feed.
-        </p>
+    <h1 className="mt-6 text-6xl md:text-7xl font-bold text-[#1D3374]">
+      Share Your Moments
+    </h1>
 
-        {/* Buttons: Smooth rounded corners matching the navbar button */}
-        <div className="mt-10 flex flex-col sm:flex-row gap-4">
-          
-          {/* Primary Button: Vibrant Orange Fill */}
-          <button className="bg-[#E9631A] text-white px-8 py-3.5 rounded-md font-semibold text-sm hover:bg-[#d05312] active:scale-95 transition-all duration-200 shadow-md">
-            Login to Post
-          </button>
+    <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
+      Discover inspiring stories, share your thoughts and connect
+      with people around the world.
+    </p>
 
-          {/* Secondary Button: Dark Slate Border */}
-          <button className="border-2 border-[#315762] text-[#315762] px-8 py-3.5 rounded-md font-semibold text-sm hover:bg-[#315762] hover:text-white active:scale-95 transition-all duration-200">
-            Explore Posts
-          </button>
-          
-        </div>
+    <div className="mt-10 flex justify-center gap-4">
+      <button className="bg-[#EB8223] text-white px-8 py-3 rounded-xl font-semibold">
+        Explore Posts
+      </button>
 
-      </div>
-    </section>
-  );
-};
+      <button className="border-2 border-[#1D3374] text-[#1D3374] px-8 py-3 rounded-xl font-semibold">
+        Learn More
+      </button>
+    </div>
 
-export default Hero;
+  </div>
+</section>
