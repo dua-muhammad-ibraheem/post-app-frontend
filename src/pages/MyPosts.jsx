@@ -25,7 +25,7 @@ const MyPosts = () => {
         <Sidebar />
         ```
         <main className="ml-64 flex-1 p-6">
-          <div className="max-w-4xl mx-auto">
+          <div className="max-w-4xl ml-12">
             <div className="flex items-center justify-between mb-8">
               <div>
                 <h1 className="text-4xl font-bold text-[#1D3374]">My Posts</h1>
