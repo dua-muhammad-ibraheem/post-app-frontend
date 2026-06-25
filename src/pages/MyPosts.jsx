@@ -1,27 +1,44 @@
 import { Pencil, Trash2 } from "lucide-react";
+import Sidebar from "../components/Sidebar";
 
 const posts = [
-  {
-    id: 1,
-    caption: "Learning React and building awesome projects 🚀",
-    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
-    date: "2 hours ago",
-  },
-  {
-    id: 2,
-    caption: "My first post app UI is almost complete 🎉",
-    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
-    date: "1 day ago",
-  },
+{
+id: 1,
+caption: "Learning React and building awesome projects 🚀",
+image:
+"https://images.unsplash.com/photo-1498050108023-c5249f4df085?w=800",
+date: "2 hours ago",
+},
+{
+id: 2,
+caption: "My first post app UI is almost complete 🎉",
+image:
+"https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
+date: "1 day ago",
+},
 ];
 
 const MyPosts = () => {
-  return (
-    <div className="min-h-screenbg-[#1D3374] bg-[#1B518D] px-6 py-10">
-      <div className="max-w-5xl mx-auto">
-        <h1 className="text-4xl font-bold text-[#0F172A] mb-2">My Posts</h1>
+return ( <div className="min-h-screen bg-[#FFF8E7]"> <div className="flex"> <Sidebar />
 
-        <p className="text-slate-500 mb-8">Manage your posts here.</p>
+```
+    <main className="ml-64 flex-1 p-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="flex items-center justify-between mb-8">
+          <div>
+            <h1 className="text-4xl font-bold text-[#1D3374]">
+              My Posts
+            </h1>
+
+            <p className="text-slate-500 mt-2">
+              View, edit and manage your published posts.
+            </p>
+          </div>
+
+          <button className="bg-[#EB8223] text-white px-5 py-3 rounded-xl hover:bg-[#d97318] transition">
+            + New Post
+          </button>
+        </div>
 
         <div className="grid md:grid-cols-2 xl:grid-cols-3 gap-6">
           {posts.map((post) => (
@@ -36,9 +53,13 @@ const MyPosts = () => {
               />
 
               <div className="p-6">
-                <p className="text-slate-800">{post.caption}</p>
+                <p className="text-slate-800 font-medium">
+                  {post.caption}
+                </p>
 
-                <p className="text-sm text-slate-400 mt-3">{post.date}</p>
+                <p className="text-sm text-slate-400 mt-3">
+                  {post.date}
+                </p>
 
                 <div className="flex gap-3 mt-6">
                   <button className="flex items-center gap-2 bg-[#EB8223] text-white px-4 py-2 rounded-xl hover:bg-[#d97318] transition">
@@ -56,8 +77,12 @@ const MyPosts = () => {
           ))}
         </div>
       </div>
-    </div>
-  );
+    </main>
+  </div>
+</div>
+
+
+);
 };
 
 export default MyPosts;
