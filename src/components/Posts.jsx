@@ -35,7 +35,7 @@ const posts = [
 
 const Posts = () => {
   return (
-<section className="w-full bg-[#FCFCFC] py-28 font-['Poppins',sans-serif]">
+<section className="w-full bg-white py-28 font-['Poppins',sans-serif]">
       <div className="max-w-7xl mx-auto px-6">
         
         <div className="flex items-end justify-between mb-10">
