@@ -1,30 +1,63 @@
+import {
+  House,
+  BookOpenText,
+  Compass,
+  Info,
+  LogIn,
+} from "lucide-react";
+
 const Navbar = () => {
   return (
-    <nav className="bg-[#315762] text-[#EFEFEF] font-['Poppins',sans-serif] shadow-md">
-      <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-        
-        {/* Logo: Modern lowercase with the vibrant orange dot */}
-        <h1 className="text-2xl font-bold tracking-tight text-[#EFEFEF]">
-          zine<span className="text-[#E9631A]">.</span>
+    <nav className="bg-white shadow-md sticky top-0 z-50 border-b border-slate-200">
+      <div className="max-w-7xl mx-auto h-20 px-8 flex items-center justify-between">
+
+        {/* Logo */}
+        <h1 className="text-4xl font-black tracking-tight text-[#1D3374]">
+          zine<span className="text-[#EB8223]">.</span>
         </h1>
 
-        {/* Links: Same original names, clean spacing, sharp look */}
-        <div className="flex items-center gap-8 text-sm font-medium">
-          <a href="#" className="hover:text-[#E9631A] transition-colors duration-200">
+        {/* Navigation */}
+        <div className="hidden md:flex items-center gap-4">
+
+          <a
+            href="#"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
+          >
+            <House size={18} />
             Home
           </a>
-          
-          <a href="#" className="hover:text-[#E9631A] transition-colors duration-200">
-            My Posts
+
+          <a
+            href="#"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
+          >
+            <BookOpenText size={18} />
+            Blog
           </a>
+
+          <a
+            href="#"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
+          >
+            <Compass size={18} />
+            Explore
+          </a>
+
+          <a
+            href="#"
+            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
+          >
+            <Info size={18} />
+            About
+          </a>
+
         </div>
 
-        {/* Action Button: Filled with vibrant Orange, smooth rounded corners */}
-        <div>
-          <button className="bg-[#E9631A] text-white text-sm font-semibold px-5 py-2 rounded-md hover:bg-[#d05312] active:scale-95 transition-all duration-250 shadow-sm">
-            Login
-          </button>
-        </div>
+        {/* Login Button */}
+        <button className="flex items-center gap-2 bg-[#EB8223] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#d97318] transition-all duration-300 shadow-md">
+          <LogIn size={18} />
+          Login
+        </button>
 
       </div>
     </nav>

@@ -1,28 +1,35 @@
-<section className="w-full bg-[#FFF8E7] py-32">
-  <div className="max-w-6xl mx-auto px-6 text-center">
 
-    <span className="inline-block bg-orange-100 text-[#EB8223] px-4 py-2 rounded-full text-sm font-semibold">
-      Share Ideas • Connect • Create
-    </span>
+const Hero = () => {
+  return (
+    <section className="w-full bg-[#EFEFEF] py-28 font-['Poppins',sans-serif]">
+      <div className="max-w-6xl mx-auto px-6 text-center">
 
-    <h1 className="mt-6 text-6xl md:text-7xl font-bold text-[#1D3374]">
-      Share Your Moments
-    </h1>
+        <span className="inline-block bg-[#EB8223]/10 text-[#EB8223] px-4 py-2 rounded-full text-sm font-semibold mb-6">
+          Share Ideas • Connect • Create
+        </span>
 
-    <p className="mt-6 max-w-2xl mx-auto text-lg text-slate-600">
-      Discover inspiring stories, share your thoughts and connect
-      with people around the world.
-    </p>
+        <h1 className="text-5xl md:text-7xl font-bold text-[#1D3374] leading-tight">
+          Share Your Moments
+        </h1>
 
-    <div className="mt-10 flex justify-center gap-4">
-      <button className="bg-[#EB8223] text-white px-8 py-3 rounded-xl font-semibold">
-        Explore Posts
-      </button>
+        <p className="mt-6 max-w-3xl mx-auto text-lg text-slate-600 leading-relaxed">
+          Discover inspiring stories, share your thoughts, and connect
+          with a community that loves creating and exploring new ideas.
+        </p>
 
-      <button className="border-2 border-[#1D3374] text-[#1D3374] px-8 py-3 rounded-xl font-semibold">
-        Learn More
-      </button>
-    </div>
+        <div className="mt-10 flex justify-center gap-4">
+          <button className="bg-[#EB8223] text-white px-8 py-3 rounded-xl font-semibold hover:bg-[#d97318] transition">
+            Explore Posts
+          </button>
 
-  </div>
-</section>
+          <button className="border-2 border-[#1D3374] text-[#1D3374] px-8 py-3 rounded-xl font-semibold hover:bg-[#1D3374] hover:text-white transition">
+            Learn More
+          </button>
+        </div>
+
+      </div>
+    </section>
+  );
+};
+
+export default Hero;
