@@ -1,16 +1,16 @@
 import Navbar from "../components/Navbar";
 import Hero from "../components/Hero";
-import Stats from "../components/Stats";
+// import Stats from "../components/Stats";
 // import CreatePost from "../components/CreatePost";
 import Posts from "../components/Posts";
 import Footer from "../components/Footer";
 
 const Home = () => {
   return (
-    <div className="min-h-screen bg-[#FFF8E7]">
+   <div className="min-h-screen bg-[#FCFCFC]">
       <Navbar />
       <Hero />
-      <Stats />
+      {/* <Stats /> */}
       {/* <CreatePost /> */}
       <Posts />
       <Footer />
