@@ -35,17 +35,37 @@ const posts = [
 
 const Posts = () => {
   return (
-    <section className="bg-[#FFF8E7] px-6 py-12">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-3xl font-bold text-[#0F172A] mb-8">
-          Recent Posts
-        </h2>
+    <section className="bg-[#FFF8E7] py-20">
+      <div className="max-w-7xl mx-auto px-6">
+        
+        <div className="flex items-end justify-between mb-10">
+
+          <div>
+            <span className="text-[#EB8223] font-semibold uppercase tracking-wider text-sm">
+              Community Feed
+            </span>
+
+            <h2 className="text-4xl font-bold text-[#1D3374] mt-2">
+              Explore Recent Posts
+            </h2>
+
+            <p className="text-slate-500 mt-3 max-w-xl">
+              Discover inspiring stories, ideas and moments shared by our community.
+            </p>
+          </div>
+
+          <button className="hidden md:block border-2 border-[#EB8223] text-[#EB8223] px-5 py-3 rounded-xl font-semibold hover:bg-[#EB8223] hover:text-white transition">
+            View All →
+          </button>
+
+        </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
             <PostCard key={post.id} post={post} />
           ))}
         </div>
+
       </div>
     </section>
   );
