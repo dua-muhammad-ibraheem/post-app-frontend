@@ -1,3 +1,5 @@
+import { Link } from "react-router-dom";
+
 import {
   House,
   BookOpenText,
@@ -19,13 +21,13 @@ const Navbar = () => {
         {/* Navigation */}
         <div className="hidden md:flex items-center gap-4">
 
-          <a
-            href="#"
-            className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
-          >
-            <House size={18} />
-            Home
-          </a>
+          <Link
+  to="/"
+  className="flex items-center gap-2 px-5 py-2.5 rounded-full text-[#1D3374] hover:bg-[#EB8223] hover:text-white transition-all duration-300"
+>
+  <House size={18} />
+  Home
+</Link>
 
           <a
             href="#"
@@ -54,10 +56,13 @@ const Navbar = () => {
         </div>
 
         {/* Login Button */}
-        <button className="flex items-center gap-2 bg-[#EB8223] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#d97318] transition-all duration-300 shadow-md">
-          <LogIn size={18} />
-          Login
-        </button>
+     <Link
+  to="/auth"
+  className="flex items-center gap-2 bg-[#EB8223] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#d97318] transition-all duration-300 shadow-md"
+>
+  <LogIn size={18} />
+  Login
+</Link>
 
       </div>
     </nav>
