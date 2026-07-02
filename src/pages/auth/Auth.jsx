@@ -14,6 +14,11 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
+if (!isLogin && password !== confirmPassword) {
+  alert("Passwords do not match");
+  return;
+}
+
     try {
       if (isLogin) {
         const response = await API.post("/login", {
@@ -37,7 +42,7 @@ const Auth = () => {
   };
   return (
     <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-6 py-10">
-      <div className="w-full max-w-md bg-[#1A1A1A] rounded-3xl shadow-2xl border border-[#EB8223]/30 p-8">
+   <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8">
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-black text-[#1D3374]">
@@ -190,9 +195,12 @@ const Auth = () => {
 
           {/* Submit Button */}
 
-          <button className="w-full bg-[#EB8223] hover:bg-[#d97318] text-white py-3 rounded-xl font-semibold transition">
-            {isLogin ? "Sign In" : "Sign Up"}
-          </button>
+         <button
+  type="submit"
+  className="w-full bg-[#EB8223] hover:bg-[#d97318] text-white py-3 rounded-xl font-semibold transition"
+>
+  {isLogin ? "Sign In" : "Sign Up"}
+</button>
         </form>
         {/* Toggle */}
 
