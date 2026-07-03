@@ -1,8 +1,9 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { Mail, Lock, User, Eye, EyeOff } from "lucide-react";
 import API from "../../api/authApi";
 const Auth = () => {
+  const navigate = useNavigate();
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -14,10 +15,10 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-if (!isLogin && password !== confirmPassword) {
-  alert("Passwords do not match");
-  return;
-}
+    if (!isLogin && password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
     try {
       if (isLogin) {
@@ -26,15 +27,17 @@ if (!isLogin && password !== confirmPassword) {
           password,
         });
 
-        console.log(response.data);
+        localStorage.setItem("token", response.data.token);
+        navigate("/dashboard");
       } else {
-        const response = await API.post("/register", {
+        await API.post("/register", {
           username,
           email,
           password,
         });
 
-        console.log(response.data);
+        alert("Registration Successful! Please Login.");
+        setIsLogin(true);
       }
     } catch (error) {
       console.log(error.response?.data || error.message);
@@ -42,7 +45,7 @@ if (!isLogin && password !== confirmPassword) {
   };
   return (
     <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-6 py-10">
-   <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8">
+      <div className="w-full max-w-md bg-white rounded-3xl shadow-lg p-8">
         {/* Logo */}
         <div className="text-center mb-8">
           <h1 className="text-4xl font-black text-[#1D3374]">
@@ -195,12 +198,12 @@ if (!isLogin && password !== confirmPassword) {
 
           {/* Submit Button */}
 
-         <button
-  type="submit"
-  className="w-full bg-[#EB8223] hover:bg-[#d97318] text-white py-3 rounded-xl font-semibold transition"
->
-  {isLogin ? "Sign In" : "Sign Up"}
-</button>
+          <button
+            type="submit"
+            className="w-full bg-[#EB8223] hover:bg-[#d97318] text-white py-3 rounded-xl font-semibold transition"
+          >
+            {isLogin ? "Sign In" : "Sign Up"}
+          </button>
         </form>
         {/* Toggle */}
 
