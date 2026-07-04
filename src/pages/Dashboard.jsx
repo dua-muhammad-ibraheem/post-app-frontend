@@ -6,9 +6,10 @@ import Posts from "../components/Posts";
 import { useState } from "react";
 import CreatePostModal from "../components/CreatePostModal";
 
+
 const Dashboard = () => {
 const [isModalOpen, setIsModalOpen] = useState(false);
-
+const user = JSON.parse(localStorage.getItem("user"));
 return ( <div className="min-h-screen bg-[#FFF8E7]"> <div className="flex"> <Sidebar />
 
 ```
@@ -16,7 +17,7 @@ return ( <div className="min-h-screen bg-[#FFF8E7]"> <div className="flex"> <Sid
     <div className="w-full px-8 space-y-6">
         <div className="bg-white rounded-3xl p-8 shadow-md">
           <h1 className="text-4xl font-bold text-[#0F172A]">
-            Welcome back 👋
+         Welcome back {user?.username || "User"} 
           </h1>
 
           <p className="text-slate-500 mt-3">
