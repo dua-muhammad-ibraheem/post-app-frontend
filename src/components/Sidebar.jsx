@@ -1,4 +1,5 @@
 import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   LayoutDashboard,
   FileText,
@@ -8,6 +9,14 @@ import {
 } from "lucide-react";
 
 const Sidebar = () => {
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+    localStorage.removeItem("user");
+
+    navigate("/auth");
+  };
   return (
     <div className="w-64 min-h-screen bg-[#1D3374] p-6 fixed left-0 top-0 border-r border-[#1B518D]">
       <h2 className="text-3xl font-bold text-white mb-10">
@@ -42,7 +51,7 @@ const Sidebar = () => {
           Settings
         </button>
 
-        <button className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#EB8223] hover:bg-[#FFEBD2] transition w-full">
+        <button onClick={handleLogout} className="flex items-center gap-3 px-4 py-3 rounded-xl text-[#EB8223] hover:bg-[#FFEBD2] transition w-full">
           <LogOut size={20} />
           Logout
         </button>
