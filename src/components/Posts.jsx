@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../api/api";
 import PostCard from "./PostCard";
 
-const Posts = () => {
+const Posts = ({ refreshPosts }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,7 +19,7 @@ const Posts = () => {
     };
 
     fetchPosts();
-  }, []);
+}, [refreshPosts]);
   
 if (loading) {
   return <h2 className="text-center py-10">Loading...</h2>;

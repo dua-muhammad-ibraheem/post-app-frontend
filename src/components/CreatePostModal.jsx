@@ -1,8 +1,11 @@
 import { useState } from "react";
 import { X, ImagePlus } from "lucide-react";
 import API from "../api/api";
-
-const CreatePostModal = ({ isOpen, onClose }) => {
+const CreatePostModal = ({
+  isOpen,
+  onClose,
+  onPostCreated,
+}) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
 
@@ -26,9 +29,9 @@ const CreatePostModal = ({ isOpen, onClose }) => {
       alert(response.data.message);
 
       setTitle("");
-      setDescription("");
+setDescription("");
 
-      onClose();
+onPostCreated();
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
     }
