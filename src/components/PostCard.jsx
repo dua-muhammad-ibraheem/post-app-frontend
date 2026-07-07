@@ -1,9 +1,17 @@
+import { useState } from "react";
 import { Heart, MessageCircle, Trash2 } from "lucide-react";
 import API from "../api/api";
 
 const PostCard = ({ post, refreshPosts }) => {
   const user = JSON.parse(localStorage.getItem("user"));
 
+  const [likes, setLikes] = useState(post.likes);
+
+  const [liked, setLiked] = useState(
+    post.likes.includes(user?._id)
+  );
+
+  // ================= DELETE POST =================
   const handleDelete = async () => {
     try {
       const token = localStorage.getItem("token");
@@ -21,6 +29,34 @@ const PostCard = ({ post, refreshPosts }) => {
       alert(error.response?.data?.message || "Something went wrong");
     }
   };
+
+  // ================= LIKE / UNLIKE =================
+  const handleLike = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      await API.put(
+        `/posts/like/${post._id}`,
+        {},
+        {
+          headers: {
+            Authorization: token,
+          },
+        }
+      );
+
+      if (liked) {
+        setLikes((prev) => prev.filter((id) => id !== user._id));
+      } else {
+        setLikes((prev) => [...prev, user._id]);
+      }
+
+      setLiked(!liked);
+    } catch (error) {
+      alert(error.response?.data?.message || "Something went wrong");
+    }
+  };
+
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition flex flex-col h-full">
       <img
@@ -32,7 +68,10 @@ const PostCard = ({ post, refreshPosts }) => {
       <div className="p-5 flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-4">
           <img
-            src={post.user?.profileImage || "https://i.pravatar.cc/150?img=1"}
+            src={
+              post.user?.profileImage ||
+              "https://i.pravatar.cc/150?img=1"
+            }
             alt={post.user?.username}
             className="w-10 h-10 rounded-full object-cover"
           />
@@ -63,12 +102,22 @@ const PostCard = ({ post, refreshPosts }) => {
           {post.title}
         </h2>
 
-        <p className="text-slate-700 line-clamp-3">{post.description}</p>
+        <p className="text-slate-700 line-clamp-3">
+          {post.description}
+        </p>
 
         <div className="mt-auto pt-5 flex items-center gap-5 text-slate-500">
-          <div className="flex items-center gap-2">
-            <Heart size={18} />
-            <span>{post.likes.length}</span>
+          <div
+            onClick={handleLike}
+            className="flex items-center gap-2 cursor-pointer"
+          >
+            <Heart
+              size={18}
+              fill={liked ? "red" : "none"}
+              color={liked ? "red" : "gray"}
+            />
+
+            <span>{likes.length}</span>
           </div>
 
           <div className="flex items-center gap-2">
