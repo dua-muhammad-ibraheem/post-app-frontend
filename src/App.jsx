@@ -10,6 +10,9 @@ import Notifications from "./pages/Notifications";
 import Settings from "./pages/Settings";
 import EditProfile from "./pages/EditProfile";
 import ProtectedRoute from "./components/ProtectedRoute";
+
+
+
 function App() {
   return (
     <BrowserRouter>
