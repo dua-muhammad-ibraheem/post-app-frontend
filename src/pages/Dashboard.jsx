@@ -15,6 +15,9 @@ const Dashboard = () => {
     setRefreshPosts((prev) => !prev);
   };
 
+  const handleRefreshPosts = () => {
+  setRefreshPosts((prev) => !prev);
+};
   return (
     <div className="min-h-screen bg-[#FFF8E7]">
       <div className="flex">
@@ -51,7 +54,10 @@ const Dashboard = () => {
 
             <RecentActivity />
 
-            <Posts refreshPosts={refreshPosts} />
+            <Posts
+  refreshPosts={refreshPosts}
+  handleRefreshPosts={handleRefreshPosts}
+/>
           </div>
         </main>
       </div>

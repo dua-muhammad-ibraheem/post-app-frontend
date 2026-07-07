@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../api/api";
 import PostCard from "./PostCard";
 
-const Posts = ({ refreshPosts }) => {
+const Posts = ({ refreshPosts, handleRefreshPosts }) => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -19,11 +19,11 @@ const Posts = ({ refreshPosts }) => {
     };
 
     fetchPosts();
-}, [refreshPosts]);
-  
-if (loading) {
-  return <h2 className="text-center py-10">Loading...</h2>;
-}
+  }, [refreshPosts]);
+
+  if (loading) {
+    return <h2 className="text-center py-10">Loading...</h2>;
+  }
   return (
     <section className="w-full bg-white py-28 font-['Poppins',sans-serif]">
       <div className="max-w-7xl mx-auto px-6">
@@ -50,7 +50,11 @@ if (loading) {
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {posts.map((post) => (
-            <PostCard key={post._id} post={post} />
+            <PostCard
+              key={post._id}
+              post={post}
+              refreshPosts={handleRefreshPosts}
+            />
           ))}
         </div>
       </div>

@@ -1,6 +1,26 @@
-import { Heart, MessageCircle } from "lucide-react";
+import { Heart, MessageCircle, Trash2 } from "lucide-react";
+import API from "../api/api";
 
-const PostCard = ({ post }) => {
+const PostCard = ({ post, refreshPosts }) => {
+  const user = JSON.parse(localStorage.getItem("user"));
+
+  const handleDelete = async () => {
+    try {
+      const token = localStorage.getItem("token");
+
+      await API.delete(`/posts/${post._id}`, {
+        headers: {
+          Authorization: token,
+        },
+      });
+
+      alert("Post deleted successfully");
+
+      refreshPosts();
+    } catch (error) {
+      alert(error.response?.data?.message || "Something went wrong");
+    }
+  };
   return (
     <div className="bg-white rounded-3xl overflow-hidden shadow-md hover:shadow-xl transition flex flex-col h-full">
       <img
@@ -9,7 +29,7 @@ const PostCard = ({ post }) => {
         className="w-full h-64 object-cover"
       />
 
-      <div  className="p-5 flex flex-col flex-1">
+      <div className="p-5 flex flex-col flex-1">
         <div className="flex items-center gap-3 mb-4">
           <img
             src={post.user?.profileImage || "https://i.pravatar.cc/150?img=1"}
@@ -17,14 +37,25 @@ const PostCard = ({ post }) => {
             className="w-10 h-10 rounded-full object-cover"
           />
 
-          <div>
-            <h3 className="font-semibold text-[#0F172A]">
-              {post.user?.username}
-            </h3>
+          <div className="flex justify-between items-start w-full">
+            <div>
+              <h3 className="font-semibold text-[#0F172A]">
+                {post.user?.username}
+              </h3>
 
-            <p className="text-sm text-slate-500">
-              {new Date(post.createdAt).toLocaleDateString()}
-            </p>
+              <p className="text-sm text-slate-500">
+                {new Date(post.createdAt).toLocaleDateString()}
+              </p>
+            </div>
+
+            {user?._id === post.user?._id && (
+              <button
+                onClick={handleDelete}
+                className="text-red-500 hover:text-red-700"
+              >
+                <Trash2 size={18} />
+              </button>
+            )}
           </div>
         </div>
 
