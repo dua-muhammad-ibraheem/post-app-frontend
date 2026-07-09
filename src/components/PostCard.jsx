@@ -2,6 +2,8 @@ import { useState } from "react";
 import { Heart, MessageCircle, Trash2 } from "lucide-react";
 import API from "../api/api";
 import CommentModal from "./CommentModal";
+ 
+
 
 const PostCard = ({ post, refreshPosts }) => {
   const user = JSON.parse(localStorage.getItem("user"));

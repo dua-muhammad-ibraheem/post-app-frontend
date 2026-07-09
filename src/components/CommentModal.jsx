@@ -1,37 +1,37 @@
 import { useState, useEffect } from "react";
 import { X } from "lucide-react";
 import API from "../api/api";
-// import { useState, useEffect, useCallback } from "react";
 
 const CommentModal = ({ isOpen, onClose, postId }) => {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
 
-  // ================= FETCH COMMENTS =================
-const fetchComments = useCallback(async () => {
-  try {
-    const response = await API.get(`/comments/${postId}`);
-    setComments(response.data.comments);
-  } catch (error) {
-    console.log(error);
-  }
-}, [postId]);
-
   useEffect(() => {
-  if (isOpen) {
-    fetchComments();
-  }
-}, [isOpen, fetchComments]);
-  // ================= ADD COMMENT =================
+    if (isOpen) {
+      fetchComments();
+    }
+  }, [isOpen, postId]);
+
+  const fetchComments = async () => {
+    try {
+      const response = await API.get(`/comments/${postId}`);
+      setComments(response.data.comments);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const handleComment = async () => {
+    if (!text.trim()) {
+      return alert("Please write a comment");
+    }
+
     try {
       const token = localStorage.getItem("token");
 
       const response = await API.post(
         `/comments/${postId}`,
-        {
-          text,
-        },
+        { text },
         {
           headers: {
             Authorization: token,
@@ -43,7 +43,6 @@ const fetchComments = useCallback(async () => {
 
       setText("");
 
-      // Comment add hone ke baad comments dobara load karo
       fetchComments();
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
@@ -53,8 +52,9 @@ const fetchComments = useCallback(async () => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
-      <div className="bg-white w-full max-w-lg rounded-3xl p-6">
+    <div className="fixed inset-0 z-[9999] bg-black/60 flex items-center justify-center px-4">
+      <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
+
         <div className="flex justify-between items-center mb-5">
           <h2 className="text-2xl font-bold text-[#1D3374]">
             Comments
@@ -65,9 +65,9 @@ const fetchComments = useCallback(async () => {
           </button>
         </div>
 
-        <div className="space-y-3 mb-5 max-h-60 overflow-y-auto">
+        <div className="space-y-3 max-h-60 overflow-y-auto mb-5">
           {comments.length === 0 ? (
-            <p className="text-slate-500 text-center">
+            <p className="text-center text-slate-500">
               No comments yet
             </p>
           ) : (
@@ -89,19 +89,20 @@ const fetchComments = useCallback(async () => {
         </div>
 
         <textarea
-          rows="3"
-          placeholder="Write a comment..."
+          rows={3}
           value={text}
           onChange={(e) => setText(e.target.value)}
+          placeholder="Write a comment..."
           className="w-full border rounded-xl p-3 outline-none"
         />
 
         <button
           onClick={handleComment}
-          className="mt-4 w-full bg-[#EB8223] text-white py-3 rounded-xl"
+          className="mt-4 w-full bg-[#EB8223] text-white py-3 rounded-xl hover:bg-orange-600"
         >
           Add Comment
         </button>
+
       </div>
     </div>
   );
