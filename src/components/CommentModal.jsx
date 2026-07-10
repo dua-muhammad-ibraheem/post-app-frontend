@@ -6,24 +6,27 @@ const CommentModal = ({ isOpen, onClose, postId }) => {
   const [text, setText] = useState("");
   const [comments, setComments] = useState([]);
 
+  // ================= LOAD COMMENTS =================
   useEffect(() => {
-    if (isOpen) {
-      fetchComments();
-    }
+    if (!isOpen) return;
+
+    const loadComments = async () => {
+      try {
+        const response = await API.get(`/comments/${postId}`);
+        setComments(response.data.comments);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    loadComments();
   }, [isOpen, postId]);
 
-  const fetchComments = async () => {
-    try {
-      const response = await API.get(`/comments/${postId}`);
-      setComments(response.data.comments);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
+  // ================= ADD COMMENT =================
   const handleComment = async () => {
     if (!text.trim()) {
-      return alert("Please write a comment");
+      alert("Please write a comment");
+      return;
     }
 
     try {
@@ -43,7 +46,9 @@ const CommentModal = ({ isOpen, onClose, postId }) => {
 
       setText("");
 
-      fetchComments();
+      // Reload comments
+      const commentsResponse = await API.get(`/comments/${postId}`);
+      setComments(commentsResponse.data.comments);
     } catch (error) {
       alert(error.response?.data?.message || "Something went wrong");
     }
@@ -52,7 +57,7 @@ const CommentModal = ({ isOpen, onClose, postId }) => {
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-[9999] bg-black/60 flex items-center justify-center px-4">
+    <div className="fixed inset-0 z-9999 bg-black/60 flex items-center justify-center px-4">
       <div className="bg-white w-full max-w-lg rounded-2xl shadow-2xl p-6">
 
         <div className="flex justify-between items-center mb-5">
@@ -93,12 +98,12 @@ const CommentModal = ({ isOpen, onClose, postId }) => {
           value={text}
           onChange={(e) => setText(e.target.value)}
           placeholder="Write a comment..."
-          className="w-full border rounded-xl p-3 outline-none"
+          className="w-full border rounded-xl p-3 outline-none resize-none"
         />
 
         <button
           onClick={handleComment}
-          className="mt-4 w-full bg-[#EB8223] text-white py-3 rounded-xl hover:bg-orange-600"
+          className="mt-4 w-full bg-[#EB8223] text-white py-3 rounded-xl hover:bg-orange-600 transition"
         >
           Add Comment
         </button>
