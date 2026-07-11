@@ -23,25 +23,25 @@ const MyPosts = () => {
     }
   };
 
- useEffect(() => {
-  const loadPosts = async () => {
-    try {
-      const token = localStorage.getItem("token");
+  useEffect(() => {
+    const loadPosts = async () => {
+      try {
+        const token = localStorage.getItem("token");
 
-      const response = await API.get("/posts/myposts", {
-        headers: {
-          Authorization: token,
-        },
-      });
+        const response = await API.get("/posts/myposts", {
+          headers: {
+            Authorization: token,
+          },
+        });
 
-      setPosts(response.data.posts);
-    } catch (error) {
-      console.log(error);
-    }
-  };
+        setPosts(response.data.posts);
+      } catch (error) {
+        console.log(error);
+      }
+    };
 
-  loadPosts();
-}, []);
+    loadPosts();
+  }, []);
 
   // ================= DELETE POST =================
   const handleDelete = async (id) => {
@@ -71,9 +71,7 @@ const MyPosts = () => {
           <div className="max-w-5xl mx-auto">
             <div className="flex items-center justify-between mb-8">
               <div>
-                <h1 className="text-4xl font-bold text-[#1D3374]">
-                  My Posts
-                </h1>
+                <h1 className="text-4xl font-bold text-[#1D3374]">My Posts</h1>
 
                 <p className="text-sm text-[#EB8223] font-medium mt-1">
                   {posts.length} Posts Published
@@ -89,27 +87,25 @@ const MyPosts = () => {
               {posts.map((post) => (
                 <div
                   key={post._id}
-                  className="bg-white rounded-3xl shadow-md overflow-hidden"
+                  className="bg-white rounded-3xl shadow-md overflow-hidden flex flex-col h-[520px]"
                 >
                   <img
                     src={
-                      post.image ||
-                      "https://placehold.co/600x400?text=No+Image"
+                      post.image || "https://placehold.co/600x400?text=No+Image"
                     }
                     alt={post.title}
                     className="w-full h-44 object-cover"
                   />
-
-                  <div className="p-6 flex flex-col h-56">
-                    <h2 className="text-xl font-semibold text-[#1D3374] mb-2">
+                  <div className="p-6 flex flex-col flex-1">
+                    <h2 className="text-xl font-semibold text-[#1D3374] line-clamp-2">
                       {post.title}
                     </h2>
 
-                    <p className="text-slate-700 line-clamp-5">
+                   <p className="text-slate-700 mt-3 line-clamp-4">
                       {post.description}
                     </p>
 
-                    <p className="text-sm text-slate-400 mt-3">
+                   <p className="text-sm text-slate-400 mt-2">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </p>
 
