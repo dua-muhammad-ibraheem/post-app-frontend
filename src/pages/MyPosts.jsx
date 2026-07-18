@@ -87,7 +87,7 @@ const MyPosts = () => {
               {posts.map((post) => (
                 <div
                   key={post._id}
-                  className="bg-white rounded-3xl shadow-md overflow-hidden flex flex-col h-[520px]"
+                  className="bg-white rounded-3xl shadow-md overflow-hidden flex flex-col h-130"
                 >
                   <img
                     src={
