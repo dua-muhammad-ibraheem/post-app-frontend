@@ -15,35 +15,34 @@ const Auth = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!isLogin && password !== confirmPassword) {
-      alert("Passwords do not match");
-      return;
-    }
-
     try {
-      if (isLogin) {
-        const response = await API.post("/login", {
-          email,
-          password,
-        });
+  if (isLogin) {
+    const response = await API.post("/login", {
+      email,
+      password,
+    });
 
-        localStorage.setItem("token", response.data.token);
-        localStorage.setItem("user", JSON.stringify(response.data.user));
+    localStorage.setItem("token", response.data.token);
+    localStorage.setItem("user", JSON.stringify(response.data.user));
 
-        navigate("/dashboard");
-      } else {
-        await API.post("/register", {
-          username,
-          email,
-          password,
-        });
+    navigate("/dashboard");
+  } else {
+    await API.post("/register", {
+      username,
+      email,
+      password,
+    });
 
-        alert("Registration Successful! Please Login.");
-        setIsLogin(true);
-      }
-    } catch (error) {
-      console.log(error.response?.data || error.message);
-    }
+    alert("Registration Successful! Please Login.");
+    setIsLogin(true);
+  }
+} catch (error) {
+  console.error(error);
+
+  alert(
+    error.response?.data?.message || "Something went wrong. Please try again."
+  );
+}
   };
   return (
     <div className="min-h-screen bg-[#0F172A] flex items-center justify-center px-6 py-10">
