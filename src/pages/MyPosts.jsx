@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import { Pencil, Trash2 } from "lucide-react";
 import Sidebar from "../components/Sidebar";
 import API from "../api/api";
+import EditModal from "../components/EditModal";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
-
+  const [isEditOpen, setIsEditOpen] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
   // ================= FETCH MY POSTS =================
   const fetchMyPosts = async () => {
     try {
@@ -101,16 +103,22 @@ const MyPosts = () => {
                       {post.title}
                     </h2>
 
-                   <p className="text-slate-700 mt-3 line-clamp-4">
+                    <p className="text-slate-700 mt-3 line-clamp-4">
                       {post.description}
                     </p>
 
-                   <p className="text-sm text-slate-400 mt-2">
+                    <p className="text-sm text-slate-400 mt-2">
                       {new Date(post.createdAt).toLocaleDateString()}
                     </p>
 
                     <div className="flex gap-3 mt-auto">
-                      <button className="flex items-center gap-2 bg-[#EB8223] text-white px-4 py-2 rounded-xl hover:bg-[#d97318] transition">
+                      <button
+                        onClick={() => {
+                          setSelectedPost(post);
+                          setIsEditOpen(true);
+                        }}
+                        className="flex items-center gap-2 bg-[#EB8223] text-white px-4 py-2 rounded-xl hover:bg-[#d97318] transition"
+                      >
                         <Pencil size={18} />
                         Edit
                       </button>
@@ -141,6 +149,12 @@ const MyPosts = () => {
             )}
           </div>
         </main>
+        <EditModal
+  isOpen={isEditOpen}
+  onClose={() => setIsEditOpen(false)}
+  post={selectedPost}
+  refreshPosts={fetchMyPosts}
+/>
       </div>
     </div>
   );
