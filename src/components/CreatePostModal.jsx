@@ -8,35 +8,40 @@ const CreatePostModal = ({
 }) => {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
+const [image, setImage] = useState(null);
 
-  const handleSubmit = async () => {
-    try {
-      const token = localStorage.getItem("token");
+ const handleSubmit = async () => {
+  try {
+    const token = localStorage.getItem("token");
 
-      const response = await API.post(
-        "/posts/create",
-        {
-          title,
-          description,
-        },
-        {
-          headers: {
-            Authorization: token,
-          },
-        },
-      );
+    const formData = new FormData();
 
-      alert(response.data.message);
+    formData.append("title", title);
+    formData.append("description", description);
 
-      setTitle("");
-setDescription("");
-
-onPostCreated();
-    } catch (error) {
-      alert(error.response?.data?.message || "Something went wrong");
+    if (image) {
+      formData.append("image", image);
     }
-  };
+
+    const response = await API.post("/posts/create", formData, {
+      headers: {
+        Authorization: token,
+      },
+    });
+
+    alert(response.data.message);
+
+    setTitle("");
+    setDescription("");
+    setImage(null);
+
+    onPostCreated();
+    onClose();
+  } catch (error) {
+    alert(error.response?.data?.message || "Something went wrong");
+  }
   if (!isOpen) return null;
+};
 
   return (
     <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 px-4">
@@ -68,8 +73,17 @@ onPostCreated();
           <ImagePlus size={40} className="text-slate-400" />
 
           <p className="mt-3 text-slate-500">Upload an image</p>
-
-          <input type="file" className="hidden" />
+{image && (
+  <p className="text-sm text-green-600 mt-2">
+    {image.name}
+  </p>
+)}
+         <input
+  type="file"
+  accept="image/*"
+  className="hidden"
+  onChange={(e) => setImage(e.target.files[0])}
+/>
         </label>
 
         <div className="flex justify-end gap-3 mt-6">
